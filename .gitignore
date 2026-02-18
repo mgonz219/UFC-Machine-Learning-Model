@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# Virtual env
+venv/
+.venv/
+
+# Data / outputs
+data/raw/
+data/processed/
+outputs/
+*.csv
+*.parquet
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Secrets
+.kaggle/
+kaggle.json
+.env
