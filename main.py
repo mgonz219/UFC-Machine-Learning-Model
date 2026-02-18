@@ -1,15 +1,10 @@
-import kagglehub
+
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-
-# Download latest version
-path = kagglehub.dataset_download("mdabbert/ultimate-ufc-dataset")
-
-print("Path to dataset files:", path)
 
 
 def load_data(path):
@@ -37,13 +32,15 @@ def evaluate_model(model, X_test, y_test):
 
 
 def main():
-    df = load_data("data/raw/your_dataset.csv")
+    df = load_data("data/ufc-master.csv")
 
     X, y = preprocess_data(df)
 
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42
     )
+
+    #df["target"] = (df["Winner"] == "Red").astype(int)
 
     scaler = StandardScaler()
     X_train = scaler.fit_transform(X_train)
@@ -52,6 +49,7 @@ def main():
     model = train_model(X_train, y_train)
 
     evaluate_model(model, X_test, y_test)
+    df[("Winner","RedOdds","BlueOdds")].head()
 
 
 if __name__ == "__main__":
